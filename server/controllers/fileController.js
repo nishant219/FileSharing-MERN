@@ -8,13 +8,13 @@ import fs from 'fs';
 export const uploadFile = async (req, res) => {
     const fileObj = {
       fileName: req.file.originalname,
-      filePath: req.file.path.replace(/\\/g, '/'),
+      filePath: req.file.path.replace(/\\/g, '/'),  // Replace \ with / for Windows
     };
     try {
       const result = await fileModel.create(fileObj);
       // console.log(result);
 
-      const fileURL=  `http://localhost:5000/result/${result._id}`;
+      const fileURL=  `https://sharewithlink.onrender.com/result/${result._id}`;
 
       const fileId = result._id.toString(); // Extract the ID as a string
       res.status(200).json({ path: fileURL, fileId });
